@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+#coding: utf-8
+
+require 'thor'
+require 'social_counter'
+
+class Command < Thor
+  default_command :all
+
+  desc 'all', 'all social share count'
+  option :url, :type => :string, :aliases => :'-u', :desc => "url"
+  def all
+    sc = SocialCounter.new(options[:url])
+
+    puts sc.title
+    puts sc.url
+
+    sc.all.each do |name, count|
+      puts "#{name}: #{count.to_s}"
+    end
+  end
+end
+
+Command.start
