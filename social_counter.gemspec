@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "social_counter"
-  s.version = "0.0.1"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["keitarou.oonishi"]
-  s.date = "2013-12-30"
+  s.date = "2014-01-31"
   s.description = "social network share counter"
   s.email = "keitarou.oonishi@gmail.com"
   s.executables = ["social_counter"]
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "bin/social_counter",
     "lib/social_counter.rb",
+    "social_counter.gemspec",
     "test/helper.rb",
     "test/test_social_counter.rb"
   ]
