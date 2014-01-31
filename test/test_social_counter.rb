@@ -3,6 +3,9 @@ require './helper'
 class TestSocialCounter < Test::Unit::TestCase
   def setup
     @url1 = "http://google.com"
+    # reddit test
+    @url1 = "http://thenextweb.com/insider/2014/01/29/paypal-denies-providing-payment-information-hacker-hijacked-50000-twitter-username/"
+
     @social_counter = SocialCounter.new(@url1)
   end
 
@@ -52,6 +55,12 @@ class TestSocialCounter < Test::Unit::TestCase
   def test_pinterest_count
     p "pinterest count: " << @social_counter.pinterest_count.to_s
     p "pinterest count: " << @social_counter.pi.to_s
+  end
+
+  def test_reddit_count
+    p "reddit count: " << @social_counter.reddit_count.to_json
+    p "reddit count: " << @social_counter.r.to_json
+    assert_equal(@social_counter.r.class.name, "Hash")
   end
 
   def test_all

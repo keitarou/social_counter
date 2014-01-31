@@ -84,6 +84,12 @@ class SocialCounter
     $1.to_i || 0
   end
 
+  def reddit_count
+    request_url = "http://tools.mercenie.com/social-share-count/api/?flag=32&format=json&url=#{@url}"
+    json = JSON.parser.new(open(request_url).read).parse
+    json["reddit"]
+  end
+
   def all
     data = {}
     self.methods.grep(/(.+)_count/) do
@@ -92,13 +98,14 @@ class SocialCounter
     data
   end
 
-  alias :t :twitter_count
-  alias :f :facebook_count
-  alias :h :hatena_count
-  alias :g :google_count
+  alias :t  :twitter_count
+  alias :f  :facebook_count
+  alias :h  :hatena_count
+  alias :g  :google_count
   alias :po :pocket_count
-  alias :l :linkedin_count
-  alias :d :delicious_count
+  alias :l  :linkedin_count
+  alias :d  :delicious_count
   alias :pi :pinterest_count
+  alias :r  :reddit_count
 
 end
