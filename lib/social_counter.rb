@@ -67,7 +67,7 @@ class SocialCounter
   end
 
   def linkedin_count
-    request_url = "http://www.linkedin.com/countserv/count/share?url=#{@url}&format=json"
+    request_url = "https://www.linkedin.com/countserv/count/share?url=#{@url}&format=json"
     JSON.parser.new(open(request_url).read).parse["count"].to_i
   end
 
@@ -95,6 +95,19 @@ class SocialCounter
     self.methods.grep(/(.+)_count/) do
       data[$1] = send("#{$1}_count")
     end
+    data
+  end
+
+  def parallel *social_names
+    threads = []
+    data = {}
+    social_names.each do |social|
+      threads << Thread.new do
+        data[social] = send("#{social}_count")
+      end
+    end
+
+    threads.each { |t| t.join }
     data
   end
 
