@@ -67,7 +67,7 @@ class SocialCounter
   end
 
   def linkedin_count
-    request_url = "http://www.linkedin.com/countserv/count/share?url=#{@url}&format=json"
+    request_url = "https://www.linkedin.com/countserv/count/share?url=#{@url}&format=json"
     JSON.parser.new(open(request_url).read).parse["count"].to_i
   end
 
