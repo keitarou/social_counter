@@ -98,6 +98,19 @@ class SocialCounter
     data
   end
 
+  def parallel *social_names
+    threads = []
+    data = {}
+    social_names.each do |social|
+      threads << Thread.new do
+        data[social] = send("#{social}_count")
+      end
+    end
+
+    threads.each { |t| t.join }
+    data
+  end
+
   alias :t  :twitter_count
   alias :f  :facebook_count
   alias :h  :hatena_count
